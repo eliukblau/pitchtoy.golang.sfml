@@ -16,10 +16,8 @@ rm -rf build
 rm -rf dist
 
 echo "\nGenerando el binario..."
-cd src
 go clean
 go build -tags appbundle -o "$1"
-cd ..
 
 echo "\nCreando App Bundle (py2app)..."
 touch dummy.py
@@ -38,7 +36,7 @@ rm -rf dist/dummy.app/Contents/Frameworks/liblzma.5.dylib
 
 echo "\nCorrigiendo estructura..."
 cp -v bundle_res/App.icns dist/dummy.app/Contents/Resources/
-mv -v "src/$1" "dist/dummy.app/Contents/MacOS/$1"
+mv -v "$1" "dist/dummy.app/Contents/MacOS/$1"
 sed "s/_APP_EXE_/$1/g" bundle_res/Info.plist \
   > dist/dummy.app/Contents/Info.plist
 
@@ -64,8 +62,9 @@ install_name_tool -change \
   "dist/dummy.app/Contents/MacOS/$1"
 
 echo "\nCopiando recursos..."
-cp -rv src/gfx dist/dummy.app/Contents/Resources/
-cp -rv src/sfx dist/dummy.app/Contents/Resources/
+cp -rv font dist/dummy.app/Contents/Resources/
+cp -rv gfx dist/dummy.app/Contents/Resources/
+cp -rv sfx dist/dummy.app/Contents/Resources/
 
 echo "\nEstableciendo nombre del App Bundle..."
 mv -v dist/dummy.app "dist/$1.app"
