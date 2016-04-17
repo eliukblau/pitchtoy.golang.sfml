@@ -3,6 +3,11 @@ package main
 import (
 	"runtime"
 
+	"fmt"
+	"math/rand"
+
+	"time"
+
 	sf "github.com/manyminds/gosfml"
 )
 
@@ -65,7 +70,8 @@ func main() {
 	})
 
 	// cargamos la musica de fondo
-	music, err := sf.NewMusicFromFile(ResourcePath("sfx", "music.ogg"))
+	rand.Seed(time.Now().UnixNano())
+	music, err := sf.NewMusicFromFile(ResourcePath("sfx", fmt.Sprintf("music%d.ogg", rand.Intn(2)+1)))
 	if err != nil {
 		panic(err)
 	}
