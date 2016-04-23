@@ -2,8 +2,24 @@
 	// See http://go.microsoft.com/fwlink/?LinkId=733558
 	// for the documentation about the tasks.json format
 	"version": "0.1.0",
-	"command": "./run.sh",
+	"command": "sh",
 	"isShellCommand": true,
-	"args": [],
-	"showOutput": "never"
+	"showOutput": "always",
+	"tasks": [
+		{
+			"taskName": "Build & Run",
+			"suppressTaskName": true,
+			"isTestCommand": true,
+			"args": ["run.sh"]
+		},
+		{
+			"taskName": "Make App Bundle",
+			"suppressTaskName": true,
+			"isBuildCommand": true,
+			"args": [
+				"make_bundle.sh",
+				"PitchToy"
+			]
+		}
+	]
 }
