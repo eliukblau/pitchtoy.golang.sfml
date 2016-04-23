@@ -1,11 +1,9 @@
 package main
 
 import (
-	"runtime"
-
 	"fmt"
 	"math/rand"
-
+	"runtime"
 	"time"
 
 	sf "github.com/manyminds/gosfml"
